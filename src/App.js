@@ -1,24 +1,30 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { Link, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
 
 const API = "http://localhost:4000";
 
 function App() {
+
+  const navigate = useNavigate();
+
   return (
     <div className="App">
       <nav>
-        <ul>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-          <li>
-            <Link to="/mobiles">Mobiles</Link>
-          </li>
-        </ul>
+        <AppBar position="static">
+          <Toolbar>
+            <Button color="inherit" onClick={() => navigate("/login")}>Login</Button>
+            <Button color="inherit" onClick={() => navigate("/mobiles")}>Mobiles</Button>
+          </Toolbar>
+        </AppBar>
       </nav>
 
+      
       <Routes>
         <Route path="/login" element={<Login />}></Route>
         <Route
@@ -35,7 +41,7 @@ function App() {
   );
 }
 
-function ProtectedRoute({children}) {
+function ProtectedRoute({ children }) {
   const isAuth = localStorage.getItem("token");
   return isAuth ? children : <Navigate replace to="/login" />;
 }
@@ -50,22 +56,29 @@ function Login() {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <input
-        placeholder="username"
+    <form className="login-form" onSubmit={formik.handleSubmit}>
+      <h2>Login</h2>
+      <TextField
+        label="username"
+        variant="outlined"
         onChange={formik.handleChange}
         value={formik.values.username}
         name="username"
-      ></input>
-      <input
+      />
+
+      <TextField
         type="password"
-        placeholder="password"
+        label="password"
+        variant="outlined"
         onChange={formik.handleChange}
         value={formik.values.password}
         name="password"
-      ></input>
-      <pre>Values:{JSON.stringify(formik.values)} </pre>
-      <button type="submit">Submit</button>
+      />
+
+      {/* <pre>Values:{JSON.stringify(formik.values)} </pre> */}
+      <Button type="submit" variant="contained">
+        Submit
+      </Button>
     </form>
   );
 }

@@ -34,7 +34,7 @@
 body {
   background-color: whitesmoke;
   font-family: Roboto;
-  margin: 16px;
+  /* margin: 16px; */
 }
 
 .phone-list-container {
@@ -43,4 +43,13 @@ body {
   justify-content: center;
   gap: 24px;
   margin: 24px;
+}
+.login-form{
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin: 0 auto;
+  max-width: 500px;
+  height: 80vh;
+  justify-content: center;
 }
