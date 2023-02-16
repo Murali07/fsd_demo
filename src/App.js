@@ -6,8 +6,9 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
+import { Phone } from "./Phone";
 
-const API = "http://localhost:4000";
+const API = "https://mobile-app-6rox.onrender.com";
 
 function App() {
 
@@ -128,16 +129,6 @@ function PhoneList() {
       {mobiles.map((mb) => (
         <Phone key={mb._id} mobile={mb} />
       ))}
-    </div>
-  );
-}
-
-function Phone({ mobile }) {
-  return (
-    <div className="phone-container">
-      <img className="phone-picture" src={mobile.img} alt={mobile.model}></img>
-      <h2 className="phone-name">{mobile.model}</h2>
-      <p className="phone-company">{mobile.company}</p>
     </div>
   );
 }
